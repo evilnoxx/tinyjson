@@ -1045,6 +1045,40 @@ func (r *Lexer) IntStr() int {
 	return int(r.Int64Str())
 }
 
+func (r *Lexer) Float32() float32 {
+	s := r.number()
+	if !r.Ok() {
+		return 0
+	}
+
+	n, err := strconv.ParseFloat(s, 32)
+	if err != nil {
+		r.addNonfatalError(&LexerError{
+			Offset: r.start,
+			Reason: err.Error(),
+			Data:   s,
+		})
+	}
+	return float32(n)
+}
+
+func (r *Lexer) Float64() float64 {
+	s := r.number()
+	if !r.Ok() {
+		return 0
+	}
+
+	n, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		r.addNonfatalError(&LexerError{
+			Offset: r.start,
+			Reason: err.Error(),
+			Data:   s,
+		})
+	}
+	return n
+}
+
 func (r *Lexer) Error() error {
 	return r.fatalError
 }

@@ -244,6 +244,16 @@ func (w *Writer) Bool(v bool) {
 	}
 }
 
+func (w *Writer) Float32(n float64) {
+	str := strconv.FormatFloat(n, 'f', 24, 32)
+	w.RawString(str)
+}
+
+func (w *Writer) Float64(n float64) {
+	str := strconv.FormatFloat(n, 'f', 24, 64)
+	w.RawString(str)
+}
+
 const chars = "0123456789abcdef"
 
 func getTable(falseValues ...int) [128]bool {
