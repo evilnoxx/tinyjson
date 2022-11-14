@@ -1126,7 +1126,7 @@ func (r *Lexer) Interface() interface{} {
 	case tokenString:
 		return r.String()
 	case tokenNumber:
-		return r.Uint64()
+		return r.Float64()
 	case tokenBool:
 		return r.Bool()
 	case tokenNull:
